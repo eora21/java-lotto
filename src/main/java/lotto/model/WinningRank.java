@@ -26,7 +26,7 @@ public enum WinningRank {
         this.description = description;
     }
 
-    public Optional<WinningRank> searchByCorrectCount(int correctCount) {
+    public static Optional<WinningRank> searchByCorrectCount(int correctCount) {
         return Arrays.stream(WinningRank.values())
                 .filter(winningRank -> winningRank.correctCount == correctCount)
                 .findFirst();
