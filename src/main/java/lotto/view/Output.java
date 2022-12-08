@@ -29,6 +29,10 @@ public class Output {
         notice(stringJoiner.toString());
     }
 
+    public void requireWinningNumber() {
+        notice("당첨 번호를 입력해 주세요.");
+    }
+
     private void notice(String text) {
         System.out.println(text);
     }
