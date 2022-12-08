@@ -1,9 +1,9 @@
 package lotto.model;
 
-import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Optional;
 
 public enum WinningRank {
-    NONE(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
@@ -24,6 +24,12 @@ public enum WinningRank {
         this.correctCount = correctCount;
         this.prizeMoney = prizeMoney;
         this.description = description;
+    }
+
+    public Optional<WinningRank> searchByCorrectCount(int correctCount) {
+        return Arrays.stream(WinningRank.values())
+                .filter(winningRank -> winningRank.correctCount == correctCount)
+                .findFirst();
     }
 
     public int getCorrectCount() {
