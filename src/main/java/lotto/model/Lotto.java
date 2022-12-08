@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +14,10 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = createLottoNumbers(numbers);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     private void validate(List<Integer> numbers) {
