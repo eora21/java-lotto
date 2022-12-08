@@ -1,6 +1,6 @@
 package lotto.view;
 
-import java.text.NumberFormat;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -10,7 +10,8 @@ import lotto.model.WinningRank;
 
 public class Output {
 
-    private static final NumberFormat numberFormat = NumberFormat.getInstance();
+    private final DecimalFormat moneyFormat = new DecimalFormat("###,###");
+    private final DecimalFormat yieldFormat = new DecimalFormat("###,###.#");
 
     public void requirePurchaseAmount() {
         notice("구입금액을 입력해 주세요.");
@@ -41,6 +42,10 @@ public class Output {
         }));
     }
 
+    public void totalYield(double yield) {
+        notice(String.format("총 수익률은 %s%%입니다.", yieldFormat.format(yield)));
+    }
+
     private String createDescription(WinningRank winningRank) {
         String description = winningRank.getDescription();
 
@@ -49,11 +54,7 @@ public class Output {
         }
 
         return String.format("%d개 일치%s (%s원)",
-                winningRank.getCorrectCount(), description, numberFormat.format(winningRank.getPrizeMoney()));
-    }
-
-    public void totalYield(double yield) {
-        notice(String.format("총 수익률은 %.1f입니다.", yield));
+                winningRank.getCorrectCount(), description, moneyFormat.format(winningRank.getPrizeMoney()));
     }
 
     private void noticeLottoNumbers(Lotto lotto) {
