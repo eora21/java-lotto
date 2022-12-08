@@ -33,6 +33,10 @@ public class Output {
         notice("당첨 번호를 입력해 주세요.");
     }
 
+    public void requireBonusNumber() {
+        notice("보너스 번호를 입력해 주세요.");
+    }
+
     private void notice(String text) {
         System.out.println(text);
     }
