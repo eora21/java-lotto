@@ -29,13 +29,11 @@ public class LottoShop {
     }
 
     private List<Lotto> issueLotto(int howManyLotto) {
-        List<Lotto> lottos = new ArrayList<>(howManyLotto);
-
-        while (lottos.size() < howManyLotto) {
-            lottos.add(new Lotto(Randoms.pickUniqueNumbersInRange(LottoNumber.START, LottoNumber.END, Lotto.SIZE)));
-        }
-
-        return lottos;
+        return new ArrayList<>(howManyLotto) {{
+            while (this.size() < howManyLotto) {
+                add(new Lotto(Randoms.pickUniqueNumbersInRange(LottoNumber.START, LottoNumber.END, Lotto.SIZE)));
+            }
+        }};
     }
 
 }
