@@ -1,12 +1,16 @@
 package lotto.model;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoShop {
 
     private static final int UNIT_PRICE = 1_000;
 
-    public void buyLotto(int purchaseAmount) {
+    public List<Lotto> buyLotto(int purchaseAmount) {
         validPurchaseAmount(purchaseAmount);
-        int numberOfLotto = howManyLotto(purchaseAmount);
+        return issueLotto(howManyLotto(purchaseAmount));
     }
 
     private void validPurchaseAmount(int purchaseAmount) {
@@ -22,6 +26,16 @@ public class LottoShop {
         }
 
         return purchaseAmount / UNIT_PRICE;
+    }
+
+    private List<Lotto> issueLotto(int howManyLotto) {
+        List<Lotto> lottos = new ArrayList<>(howManyLotto);
+
+        while (lottos.size() < howManyLotto) {
+            lottos.add(new Lotto(Randoms.pickUniqueNumbersInRange(LottoNumber.START, LottoNumber.END, Lotto.SIZE)));
+        }
+
+        return lottos;
     }
 
 }
