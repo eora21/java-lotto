@@ -24,6 +24,14 @@ public class Output {
         }
     }
 
+    public void requireWinningNumber() {
+        notice("당첨 번호를 입력해 주세요.");
+    }
+
+    public void requireBonusNumber() {
+        notice("보너스 번호를 입력해 주세요.");
+    }
+
     public void winningStatistics(Map<WinningRank, Integer> winningStatus) {
         notice("당첨 통계");
         notice("---");
@@ -44,6 +52,10 @@ public class Output {
                 winningRank.getCorrectCount(), description, numberFormat.format(winningRank.getPrizeMoney()));
     }
 
+    public void totalYield(double yield) {
+        notice(String.format("총 수익률은 %.1f입니다.", yield));
+    }
+
     private void noticeLottoNumbers(Lotto lotto) {
         StringJoiner stringJoiner = new StringJoiner(", ", "[", "]");
 
@@ -52,14 +64,6 @@ public class Output {
         }
 
         notice(stringJoiner.toString());
-    }
-
-    public void requireWinningNumber() {
-        notice("당첨 번호를 입력해 주세요.");
-    }
-
-    public void requireBonusNumber() {
-        notice("보너스 번호를 입력해 주세요.");
     }
 
     private void notice(String text) {
