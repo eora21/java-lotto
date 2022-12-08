@@ -2,9 +2,9 @@ package lotto.model;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int START = 1;
+    public static final int START = 1;
 
-    private static final int END = 45;
+    public static final int END = 45;
 
     private final int lottoNumber;
 
