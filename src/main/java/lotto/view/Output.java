@@ -46,6 +46,10 @@ public class Output {
         notice(String.format("총 수익률은 %s%%입니다.", yieldFormat.format(yield)));
     }
 
+    public void error(String errorText) {
+        notice(String.format("[ERROR]: %s", errorText));
+    }
+
     private String createDescription(WinningRank winningRank) {
         String description = winningRank.getDescription();
 
