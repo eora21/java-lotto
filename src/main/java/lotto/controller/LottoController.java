@@ -4,17 +4,37 @@ import java.util.List;
 import java.util.Map;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
+import lotto.model.LottoShop;
+import lotto.model.WinningLotto;
 import lotto.model.WinningRank;
+import lotto.model.Yield;
 import lotto.view.Input;
 import lotto.view.Output;
 
-public class ViewController {
+public class LottoController {
 
     private final Input input = new Input();
 
     private final Output output = new Output();
 
-    public int purchaseAmount() {
+    private final LottoShop lottoShop = new LottoShop();
+
+    private final Yield yield = new Yield();
+
+    public void run() {
+        try {
+            int purchaseAmount = purchaseAmount();
+            List<Lotto> lottoBundle = lottoShop.buyLotto(purchaseAmount);
+            lottoStatus(lottoBundle);
+            WinningLotto winningLotto = new WinningLotto(winningNumber(), bonusNumber());
+            Map<WinningRank, Integer> winningState = winningLotto.calculateWinningState(lottoBundle);
+            result(winningState, yield.calculate(winningState, purchaseAmount));
+        } catch (IllegalArgumentException e) {
+            output.error(e.getMessage());
+        }
+    }
+
+    private int purchaseAmount() {
         output.requirePurchaseAmount();
         int purchaseAmount = input.purchaseAmount();
         output.blank();
@@ -22,12 +42,12 @@ public class ViewController {
         return purchaseAmount;
     }
 
-    public void lottoStatus(List<Lotto> lottoBundle) {
+    private void lottoStatus(List<Lotto> lottoBundle) {
         output.lottoStatus(lottoBundle);
         output.blank();
     }
 
-    public Lotto winningNumber() {
+    private Lotto winningNumber() {
         output.requireWinningNumber();
         Lotto winningNumber = input.winningNumber();
         output.blank();
@@ -35,7 +55,7 @@ public class ViewController {
         return winningNumber;
     }
 
-    public LottoNumber bonusNumber() {
+    private LottoNumber bonusNumber() {
         output.requireBonusNumber();
         LottoNumber bonusNumber = input.bonusNumber();
         output.blank();
@@ -43,7 +63,7 @@ public class ViewController {
         return bonusNumber;
     }
 
-    public void result(Map<WinningRank, Integer> winningStatus, double yield) {
+    private void result(Map<WinningRank, Integer> winningStatus, double yield) {
         output.winningStatistics(winningStatus);
         output.totalYield(yield);
     }
