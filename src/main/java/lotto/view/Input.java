@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 public class Input {
 
@@ -19,6 +20,12 @@ public class Input {
                 Arrays.stream(input)
                         .map(this::toInt)
                         .collect(Collectors.toList()));
+    }
+
+    public LottoNumber bonusNumber() {
+        String input = Console.readLine();
+        int number = toInt(input);
+        return LottoNumber.newInstance(number);
     }
 
     private int toInt(String input) {
